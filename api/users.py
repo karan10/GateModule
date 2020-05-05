@@ -40,7 +40,7 @@ def post_users():
     }), 200
 
 
-@app.route('/user/<user_id>', methods=['POST'])
+@app.route('/user/<user_id>/is-allowed', methods=['POST'])
 def is_user_allowed(user_id):
     data = request.get_json()
 
@@ -49,16 +49,29 @@ def is_user_allowed(user_id):
 
     user_id = uuid.UUID(user_id)
     user = user_obj.get(user_id)
+    if not user:
+        raise BadRequest("User does not exists")
+
 
     gate_id = uuid.UUID(data['gate_id'])
     gate_obj = GateResolver.new()
     gate = gate_obj.get(gate_id)
+    if not gate:
+        raise BadRequest("Gate does not exists")
 
-    is_allowed = Evaluation().evaluate(gate['condition'], user)
-    return jsonify({
-        'success': True,
-        'data': is_allowed
-    }), 200
+
+    try:
+        is_allowed = Evaluation().evaluate(gate[0]['condition'], user[0])
+        return jsonify({
+            'success': True,
+            'data': is_allowed
+        }), 200
+    except Exception as e:
+        return jsonify({
+            'success': False,
+            'data': e.__str__()
+        }), 400
+
 
 def _is_create_user_valid(data):
     if set(required_attributes) != set(dict(data).keys()):

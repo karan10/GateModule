@@ -14,7 +14,7 @@ class InMemUser(UserInterface):
         return self.user_list
 
     def get(self, user_id: uuid.UUID):
-        return list(filter(lambda x: x['id'] == user_id, self.user_list))[0]
+        return list(filter(lambda x: x['id'] == user_id, self.user_list))
 
     def add(self, user: User):
         user.id = uuid.uuid4()

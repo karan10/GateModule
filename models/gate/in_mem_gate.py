@@ -18,7 +18,7 @@ class InMemGate(GateInterface):
         return self.gate_list
 
     def get(self, gate_id: uuid.UUID):
-        return list(filter(lambda x: (x['id'] == gate_id), self.gate_list))[0]
+        return list(filter(lambda x: (x['id'] == gate_id), self.gate_list))
 
     def add(self, gate: Gate):
         gate.id = uuid.uuid4()
