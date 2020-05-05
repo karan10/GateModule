@@ -16,5 +16,8 @@
 
 Whenever the flask server is started it will create a default user & default gate in memory. You can get the details using get API.
 
+Attributes supported - ['age', 'gender', 'past_order_amount', 'days_active']
+Operators supported - ['<', '<=', '>', '>=', '==', 'AND', 'OR']
+
 ## Postman collection
 [GateModule Collection]([Click to get collection](https://www.getpostman.com/collections/a56923ca0ad0749d67ad))
