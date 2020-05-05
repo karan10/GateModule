@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_cors import CORS
 
-app = Flask('dextr-docker')
+app = Flask('gating module')
 CORS(app)
 
 import api.users
