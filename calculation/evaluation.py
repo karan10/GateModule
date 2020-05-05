@@ -65,10 +65,9 @@ class Evaluation:
                 stack.push(i)
 
             else:
-                val1 = stack.pop()
-                val2 = stack.pop()
                 arg = []
-                for val in [val1, val2]:
+                for idx in range(0, self.operator_map[i].operands_count):
+                    val = stack.pop()
                     if val in user_attribute:
                         arg = [user_attribute[val]] + arg
                     else:
